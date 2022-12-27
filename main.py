@@ -6,6 +6,7 @@ from src.benchmarker import Benchmarker
 from src.finders.dijkstra import DijkstrasPathFinder
 from src.finders.nearest_neighbour import NearestNeighbourPathFinder
 
+
 if __name__ == '__main__':
 
     cmd = sys.argv[1]
@@ -17,9 +18,8 @@ if __name__ == '__main__':
             config = yaml.load(f.read(), Loader=yaml.FullLoader)
 
         benchmarker = Benchmarker(world_sizes=config['world_sizes'])
-        naive_logs, dijkstras_logs = benchmarker.run()
-        benchmarker.visualise_results(naive_logs)
-        benchmarker.visualise_results(dijkstras_logs)
+        logs = benchmarker.run()
+        benchmarker.visualise_results(logs)
 
     elif cmd == 'run':
         logging.info('Running a single experiment as specified in args')

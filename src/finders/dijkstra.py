@@ -76,22 +76,25 @@ class DijkstrasPathFinder(WorldClass):
     5) Set new current node to the minimum connecting node 
     6) Repeat
     '''
+    # Initialize log variables
     world_vis = np.zeros_like(self.world)
-
     loop_steps = 0
     current_node = 0
     start_time = time.perf_counter()
     target_node = list(self.graph_world.nodes.keys())[-1]
     visited_nodes, visited_node_grid_idxs = [0], [(0,0)]
     start_ram = psutil.virtual_memory()[3]/1000000000
+    # Begin search algorithm
     while True:
       loop_steps += 1
+      # Get current node values
       current_node_values = self.graph_world.nodes[current_node]
       edges = current_node_values['edges']
+      # Iterate over available edges conencted to current nodes
       for i, edge in enumerate(edges):
         old_node_weight = self.graph_world.nodes[edge[1]]['node_weight']
         new_node_weight = current_node_values['node_weight'] + current_node_values['edge_weights'][i]
-        # Update connected nodes weights
+        # Update connected nodes weights 
         if old_node_weight == np.inf:
           self.graph_world.nodes[edge[1]]['node_weight'] = new_node_weight
       # Select the minimum node value
@@ -100,6 +103,7 @@ class DijkstrasPathFinder(WorldClass):
       visited_nodes.append(new_node)
       visited_node_grid_idxs.append(list(self.graph_world.nodes[new_node]['grid_idx']))
       world_vis[self.graph_world.nodes[current_node]['grid_idx'][0], self.graph_world.nodes[current_node]['grid_idx'][1]] = new_node_value
+      # Terminate as target node found
       if current_node == target_node:
         logs = self.output_logs(world_vis[-1,-1], loop_steps, (time.perf_counter()-start_time)*1000, print_out_logs)
         logs['max_ram_used'] = Decimal(psutil.virtual_memory()[3]/1000000000) - Decimal(start_ram)
@@ -114,3 +118,4 @@ class DijkstrasPathFinder(WorldClass):
     '''
     Gets the shortest path idxs from the passed world
     '''
+    print(world)
