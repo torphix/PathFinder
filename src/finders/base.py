@@ -6,6 +6,7 @@ from matplotlib.colors import ListedColormap
 
 class WorldClass(abc.ABC):
     def __init__(self, world_size=(9, 9), max_timesteps=9, world=None, world_distribution='uniform'):
+        assert world_distribution in ['normal','exponential','uniform']
         self.world_size = world_size
         self.max_timesteps = max_timesteps
         self.world_distribution = world_distribution
@@ -15,8 +16,17 @@ class WorldClass(abc.ABC):
         else:
             self.world = world
 
-    def create_world(self, grid_size, max_timesteps):
-        world = np.random.randint(0, max_timesteps, grid_size)
+    def create_world(self, grid_size, max_timesteps, world_distribution):
+        if world_distribution == 'uniform':
+            world = np.random.randint(0, max_timesteps, grid_size)
+        elif world_distribution == 'normal':
+            world = np.random.normal(4, 2.25, self.world_size)
+            world = np.round(world)
+            world = np.clip(world, 0, self.max_timesteps)
+        elif world_distribution == 'exponential':
+            world = np.random.exponential(2, self.world_size)
+            world = np.round(world)
+            world = np.clip(world, 0, self.max_timesteps)
         return world
 
     def display_world(self, array, path_idxs=None):

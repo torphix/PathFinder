@@ -4,10 +4,9 @@ world_sizes: [
   [15,15],
   [50,20],
 ]
-timestep_max_min: [
-  [0, 9],
-  [0, 9],
-  [0, 9],
+distribution: [
+  'uniform',
+  'exponential',
+  'normal',
 ]
-distribution: 'normal'
 

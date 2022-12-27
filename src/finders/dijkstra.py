@@ -51,8 +51,8 @@ class Graph():
     return min_node, min_node_value
 
 class DijkstrasPathFinder(WorldClass):
-  def __init__(self, world_size=(9,9), max_timesteps=9, world=None):
-      super().__init__(world_size, max_timesteps, world)
+  def __init__(self, world_size=(9,9), max_timesteps=9, world=None, world_dist='uniform'):
+      super().__init__(world_size, max_timesteps, world, world_dist)
       self.graph_world = Graph(self.world)
 
   def min_value_in_array(self, array):

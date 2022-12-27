@@ -5,8 +5,8 @@ from .base import WorldClass
 
 
 class NearestNeighbourPathFinder(WorldClass):
-    def __init__(self, world_size=(9, 9), max_timesteps=9, world=None):
-        super().__init__(world_size, max_timesteps, world)
+    def __init__(self, world_size=(9, 9), max_timesteps=9, world=None, world_dist='uniform'):
+        super().__init__(world_size, max_timesteps, world, world_dist)
 
     def find_path(self, print_out_logs=False):
         '''

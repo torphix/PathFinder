@@ -12,6 +12,7 @@ optional args:
     --width (sets the width of the world default == 9)
     --height (sets the height of the world default == 9)
     --max (sets the maximum timestep possible == 9)
+    --timestep_dist exponential OR uniform OR normal (default is uniform)
 ```python main.py run --type=nearest_neighbour```
 
 To benchmark dijkstra vs nearest neighbour fill out the benchmark_config.yaml  and run command
