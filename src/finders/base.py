@@ -37,6 +37,7 @@ class WorldClass(abc.ABC):
           ax.text(j, i, '{:0.1f}'.format(z), ha='center', va='center', color=color)
         plt.show()
 
+    @abc.abstractclassmethod
     def find_path(self):
       raise NotImplemented
 
@@ -49,5 +50,5 @@ class WorldClass(abc.ABC):
       return {
             'total_time_steps':total_time_steps,
             'loop_steps':loop_steps,
-            'end_time':end_time,
+            'end_time':round(end_time, 4),
         }

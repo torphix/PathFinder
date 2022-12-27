@@ -15,7 +15,7 @@ class Graph():
       idx (0): {grid_idx: (0,0), edges:[[0,1], [1,0]], edge_weights:[[4, 5]]}
     }
     '''
-    nodes_tmp = [(j,i) for j in range(world_grid.shape[1])  for i in range(world_grid.shape[0])]
+    nodes_tmp = [(j,i) for j in range(world_grid.shape[0])  for i in range(world_grid.shape[1])]
     nodes_idx_dict = {v:i for i,v in enumerate(nodes_tmp)}
     self.nodes = {}
     for node, i in nodes_idx_dict.items():

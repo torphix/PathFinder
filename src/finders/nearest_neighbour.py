@@ -1,7 +1,7 @@
 import time
 import psutil
 from decimal import Decimal
-from base import WorldClass
+from .base import WorldClass
 
 
 
