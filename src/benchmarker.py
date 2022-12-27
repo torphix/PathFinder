@@ -57,12 +57,15 @@ class Benchmarker():
                 log['output_logs']['total_time_steps'] for log in v]
             output_logs[k]['end_times'] = [
                 log['output_logs']['end_time'] for log in v]
+            output_logs[k]['loop_steps'] = [
+                log['output_logs']['loop_steps'] for log in v]
             print('Num steps', output_logs[k]['total_time_steps'],
-                  'Run Time', output_logs[k]['end_times'])
+                  'Run Time', output_logs[k]['end_times'],
+                  'Loop Steps', output_logs[k]['loop_steps'])
 
         # Plot logged values as logs vs hyperparameters grid size
         X = self.world_sizes
-        fig, (ax1, ax2) = plt.subplots(1, 2)
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
 
         X_axis = np.arange(len(X))
         ax1.bar(X_axis - 0.2, output_logs['nearest_neighbour']
@@ -85,5 +88,16 @@ class Benchmarker():
         ax2.set_ylabel("Run Time In Milliseconds")
         ax2.set_title("Effect of grid size on run time")
         ax2.legend()
+
+        X_axis = np.arange(len(X))
+        ax3.bar(X_axis - 0.2, output_logs['nearest_neighbour']
+                ['loop_steps'], 0.4, label='nearest_neighbour')
+        ax3.bar(X_axis + 0.2, output_logs['dijkstra']
+                ['loop_steps'], 0.4, label='dijkstra')
+        ax3.set_xticks(X_axis, X)
+        ax3.set_xlabel("World Size")
+        ax3.set_ylabel("Number of Loop Iterations")
+        ax3.set_title("Effect of grid size on loop iterations required")
+        ax3.legend()
 
         plt.show()
